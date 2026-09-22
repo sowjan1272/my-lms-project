@@ -1,0 +1,21 @@
+CREATE TABLE students (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL UNIQUE,
+    student_code VARCHAR(20) NOT NULL UNIQUE,
+    full_name VARCHAR(150) NOT NULL,
+    photo_url VARCHAR(500) NULL,
+    dob DATE NOT NULL,
+    gender VARCHAR(20) NULL,
+    phone VARCHAR(20) NOT NULL,
+    address VARCHAR(500) NULL,
+    emergency_contact VARCHAR(20) NULL,
+    qualification VARCHAR(255) NULL,
+    college VARCHAR(255) NULL,
+    status ENUM('ACTIVE','COMPLETED','SUSPENDED','DROPPED','PENDING') NOT NULL DEFAULT 'PENDING',
+    mentor_staff_id BIGINT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_students_user FOREIGN KEY (user_id) REFERENCES users(id),
+    INDEX idx_students_mentor (mentor_staff_id),
+    INDEX idx_students_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
