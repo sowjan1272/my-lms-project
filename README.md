@@ -1,11 +1,15 @@
 # Student, Staff & Admin Management System
 
-A full-stack management platform for a training/internship company: three role-based
+A full-stack management platform for a training/internship organization: three role-based
 dashboards (Student, Staff, Admin) covering authentication, attendance, tasks,
 courses/internships, fees, salaries, and projects.
 
 **Stack:** React + TypeScript + Vite + Tailwind (frontend) · Java 21 + Spring Boot +
 Spring Security + Spring Data JPA (backend) · MySQL 8 + Flyway (database) · JWT + BCrypt (auth).
+
+<!-- Optional: add 2-3 screenshots here once you have them, e.g.
+![Admin Dashboard](docs/screenshots/admin-dashboard.png)
+-->
 
 ---
 
@@ -14,7 +18,7 @@ Spring Security + Spring Data JPA (backend) · MySQL 8 + Flyway (database) · JW
 - **Auth & roles**: register (student/staff), login, JWT access + refresh tokens, BCrypt
   hashing, role-based route protection on both frontend and backend, staff accounts require
   admin activation before they can log in as ACTIVE.
-- **Database**: all 17 tables from the schema doc, wired with Flyway migrations (`V1`–`V17`).
+- **Database**: all 17 tables from the schema doc, wired with Flyway migrations (`V1`–`V18`).
 - **Students**: profile, admin directory with search, staff "my students" view, mentor
   assignment, status management (Active/Completed/Suspended/Dropped/Pending).
 - **Staff**: profile, admin directory, activate/deactivate, skills.
@@ -71,6 +75,12 @@ cd backend
 cp .env.example .env    # then edit DB_PASSWORD and JWT_SECRET
 ```
 
+> **Important:** generate your own `JWT_SECRET` — don't reuse the one in `.env.example`.
+> You can generate a strong one with:
+> ```bash
+> openssl rand -base64 48
+> ```
+
 Export the variables (or use your IDE's run config / a tool like `direnv`) and run:
 
 ```bash
@@ -89,6 +99,10 @@ mvn spring-boot:run
 Flyway runs the migrations automatically on startup. The API listens on `http://localhost:8080`.
 
 ### Demo login credentials (only when run with the `dev` profile)
+
+> ⚠️ These accounts and passwords only exist when running locally with `-Dspring-boot.run.profiles=dev`.
+> They are seeded test data for local development/demo purposes only — never enable the `dev`
+> profile or reuse these credentials in a deployed/production environment.
 
 | Role | Email | Password |
 |---|---|---|
@@ -127,3 +141,8 @@ Open `http://localhost:5173`.
 If this is being shown as a portfolio/interview project, be upfront that: file upload storage,
 CSV/PDF report export, and real-time notification push are not implemented — call them out as
 "next steps" rather than let someone discover the gap themselves.
+
+## License
+
+This project is available under the [MIT License](LICENSE) — add a `LICENSE` file if you
+intend to make this repository public and want to state usage terms explicitly.
